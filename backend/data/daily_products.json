@@ -1,0 +1,15 @@
+{
+  "2025-10-15": [
+    {
+      "department": "Bonnell Coiling",
+      "day_shift": 174960,
+      "night_shift": 62005
+    },
+    {
+      "department": "Pocketed Coiling",
+      "day_shift": 115200,
+      "night_shift": 56989
+    },
+    { "department": "Quilting", "day_shift": 2000, "night_shift": 1458 }
+  ]
+}

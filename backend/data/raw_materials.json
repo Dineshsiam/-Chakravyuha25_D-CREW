@@ -1,0 +1,5 @@
+[
+  { "material": "Steel", "quantity": 1000, "department": "Bonnell Coiling" },
+  { "material": "Foam", "quantity": 500, "department": "Foam Cutting" },
+  { "material": "Thread", "quantity": 2000, "department": "Quilting" }
+]

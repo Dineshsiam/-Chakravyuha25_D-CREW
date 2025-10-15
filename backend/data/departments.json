@@ -1,0 +1,13 @@
+[
+  { "section": "Steel", "qty": 56 },
+  { "section": "Quilting", "qty": 73 },
+  { "section": "Tape Edge", "qty": 53 },
+  { "section": "Cirrus", "qty": 22 },
+  { "section": "QC", "qty": 36 },
+  { "section": "Return Goods", "qty": 9 },
+  { "section": "Carpentry", "qty": 17 },
+  { "section": "Maintenance", "qty": 12 },
+  { "section": "Despatch", "qty": 23 },
+  { "section": "Shifting", "qty": 20 },
+  { "section": "Foam Cutting", "qty": 25 }
+]

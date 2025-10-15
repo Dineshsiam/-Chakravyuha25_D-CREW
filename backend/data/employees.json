@@ -1,0 +1,25 @@
+[
+    {
+        "id": 1,
+        "name": "Alice",
+        "age": 25,
+        "department": "Spring",
+        "working": true,
+        "qr_code": "qrcodes/emp_1.png",
+        "attendance": [
+            {
+                "date": "2025-10-15",
+                "time": "08:15:00"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Bob",
+        "age": 30,
+        "department": "Foam",
+        "working": true,
+        "qr_code": "qrcodes/emp_2.png",
+        "attendance": []
+    }
+]
