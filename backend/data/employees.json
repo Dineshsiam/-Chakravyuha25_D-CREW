@@ -4,12 +4,14 @@
         "name": "Alice",
         "age": 25,
         "department": "Spring",
-        "working": true,
+        "working": false,
         "qr_code": "qrcodes/emp_1.png",
         "attendance": [
             {
                 "date": "2025-10-15",
-                "time": "08:15:00"
+                "time": "08:15:00",
+                "logout_time": "16:24:28",
+                "login_time": "16:24:06"
             }
         ]
     },
@@ -21,5 +23,148 @@
         "working": true,
         "qr_code": "qrcodes/emp_2.png",
         "attendance": []
+    },
+    {
+        "id": 3,
+        "name": "Charlie",
+        "age": 22,
+        "department": "Assembly",
+        "working": true,
+        "qr_code": "qrcodes/emp_3.png",
+        "attendance": [
+            {
+                "date": "2025-10-15",
+                "time": "08:05:00"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Diana",
+        "age": 28,
+        "department": "Packaging",
+        "working": false,
+        "qr_code": "qrcodes/emp_4.png",
+        "attendance": []
+    },
+    {
+        "id": 5,
+        "name": "Ethan",
+        "age": 35,
+        "department": "Foam",
+        "working": true,
+        "qr_code": "qrcodes/emp_5.png",
+        "attendance": [
+            {
+                "date": "2025-10-15",
+                "time": "08:30:00"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Fiona",
+        "age": 41,
+        "department": "Spring",
+        "working": true,
+        "qr_code": "qrcodes/emp_6.png",
+        "attendance": [
+            {
+                "date": "2025-10-15",
+                "time": "08:10:00"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "George",
+        "age": 48,
+        "department": "Quality Control",
+        "working": true,
+        "qr_code": "qrcodes/emp_7.png",
+        "attendance": []
+    },
+    {
+        "id": 8,
+        "name": "Hannah",
+        "age": 32,
+        "department": "Foam",
+        "working": true,
+        "qr_code": "qrcodes/emp_8.png",
+        "attendance": [
+            {
+                "date": "2025-10-15",
+                "time": "08:25:00"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Ian",
+        "age": 27,
+        "department": "Assembly",
+        "working": false,
+        "qr_code": "qrcodes/emp_9.png",
+        "attendance": []
+    },
+    {
+        "id": 10,
+        "name": "Jasmine",
+        "age": 38,
+        "department": "Packaging",
+        "working": true,
+        "qr_code": "qrcodes/emp_10.png",
+        "attendance": [
+            {
+                "date": "2025-10-15",
+                "time": "08:05:00"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Kevin",
+        "age": 45,
+        "department": "Maintenance",
+        "working": true,
+        "qr_code": "qrcodes/emp_11.png",
+        "attendance": []
+    },
+    {
+        "id": 12,
+        "name": "Laura",
+        "age": 29,
+        "department": "Spring",
+        "working": true,
+        "qr_code": "qrcodes/emp_12.png",
+        "attendance": [
+            {
+                "date": "2025-10-15",
+                "time": "08:12:00"
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Michael",
+        "age": 51,
+        "department": "Quality Control",
+        "working": true,
+        "qr_code": "qrcodes/emp_13.png",
+        "attendance": []
+    },
+    {
+        "id": 14,
+        "name": "Nina",
+        "age": 23,
+        "department": "Assembly",
+        "working": true,
+        "qr_code": "qrcodes/emp_14.png",
+        "attendance": [
+            {
+                "date": "2025-10-15",
+                "time": "08:20:00"
+            }
+        ]
     }
 ]

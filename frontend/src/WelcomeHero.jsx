@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function WelcomeHero() {
- const slogans = [
-  "Live QR Attendance",
-  "Automatic Workforce Analytics",
-  "Toggle Attendance Real-time",
-  "Visual Dashboard on TV",
-];
-
+  const slogans = [
+    "Live QR Attendance",
+    "Automatic Workforce Analytics",
+    "Toggle Attendance Real-time",
+    "Visual Dashboard on TV",
+  ];
 
   const [index, setIndex] = useState(0);
 
@@ -21,42 +20,85 @@ export default function WelcomeHero() {
   }, []);
 
   return (
-    <header className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-700 text-white">
-      <div className="text-center space-y-8">
-        <motion.div
+    <header className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#3b0764] text-white">
+      {/* Animated background glow */}
+      <div className="absolute inset-0">
+        <div className="absolute w-[600px] h-[600px] bg-purple-600/30 blur-[150px] rounded-full top-1/3 left-1/4 animate-pulse" />
+        <div className="absolute w-[500px] h-[500px] bg-indigo-600/20 blur-[120px] rounded-full bottom-1/3 right-1/4 animate-pulse delay-1000" />
+      </div>
+
+      <div className="text-center relative z-10 space-y-10 px-6">
+        {/* Title */}
+        <motion.h1
+          className="text-5xl sm:text-7xl font-extrabold leading-tight bg-gradient-to-r from-emerald-300 via-blue-400 to-purple-500 bg-clip-text text-transparent drop-shadow-lg"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1 }}
         >
-          <h1 className="text-5xl sm:text-6xl font-extrabold leading-tight">
-            Welcome!
-          </h1>
-          <p className="mt-4 text-lg text-slate-200/90 max-w-xl mx-auto">
-            Real-time workforce attendance, production analytics, and prediction
-            dashboard for your factory.
-          </p>
-        </motion.div>
+          Welcome to Smart Workforce
+        </motion.h1>
 
-        <div className="mt-8 text-sm text-slate-300 flex justify-center gap-3">
-          <span>Slogan:</span>
-          <div className="relative h-6 w-72 overflow-hidden">
+        {/* Subtitle */}
+        <motion.p
+          className="mt-4 text-lg sm:text-xl text-slate-300/90 max-w-2xl mx-auto"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 1 }}
+        >
+          Empowering your factory with real-time attendance, predictive
+          analytics, and productivity visualization.
+        </motion.p>
+
+        {/* Slogan box (fixed height) */}
+        <div className="mt-12 flex justify-center">
+          <div className="relative w-80 h-14 overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
                 key={index}
-                initial={{ y: 18, opacity: 0 }}
+                initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -18, opacity: 0 }}
-                transition={{ duration: 0.45 }}
-                className="absolute left-0"
+                exit={{ y: -20, opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className="absolute inset-0 flex items-center justify-center"
               >
-                <span className="font-medium text-emerald-200">
-                  {slogans[index]}
-                </span>
+                <div className="backdrop-blur-md bg-white/10 border border-white/20 px-6 py-3 rounded-2xl shadow-lg text-center">
+                  <span className="font-semibold text-emerald-300 tracking-wide text-lg">
+                    {slogans[index]}
+                  </span>
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
         </div>
+
+        {/* Get Started Button */}
+        <motion.div
+          className="mt-20"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+        >
+          <button className="px-10 py-4 text-lg font-semibold rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-purple-600 hover:to-indigo-500 shadow-lg shadow-indigo-900/40 transition-all duration-300">
+            🚀 Get Started
+          </button>
+        </motion.div>
       </div>
+
+      {/* Floating lights */}
+      <motion.div
+        className="absolute top-10 left-10 w-4 h-4 bg-emerald-400 rounded-full shadow-[0_0_30px_8px_rgba(16,185,129,0.4)]"
+        animate={{
+          y: [0, -15, 0],
+        }}
+        transition={{ repeat: Infinity, duration: 3 }}
+      />
+      <motion.div
+        className="absolute bottom-16 right-16 w-3 h-3 bg-blue-400 rounded-full shadow-[0_0_25px_5px_rgba(59,130,246,0.4)]"
+        animate={{
+          y: [0, 20, 0],
+        }}
+        transition={{ repeat: Infinity, duration: 4 }}
+      />
     </header>
   );
 }

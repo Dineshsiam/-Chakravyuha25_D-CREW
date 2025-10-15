@@ -1,90 +1,192 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_file
 import json, datetime, os
+from flask_cors import CORS
+import qrcode
 
 app = Flask(__name__)
-DATA_DIR = "data"
+CORS(app)
 
-# ---------- Utility Functions ----------
-def load_json(filename):
-    with open(os.path.join(DATA_DIR, filename), "r") as f:
+DATA_FILE = "data/employees.json"
+
+# ------------------------------
+# Helper Functions
+# ------------------------------
+def load_employees():
+    if not os.path.exists(DATA_FILE):
+        return []
+    with open(DATA_FILE, "r") as f:
         return json.load(f)
 
-def save_json(filename, data):
-    with open(os.path.join(DATA_DIR, filename), "w") as f:
-        json.dump(data, f, indent=4)
+def save_employees(employees):
+    os.makedirs("data", exist_ok=True)
+    with open(DATA_FILE, "w") as f:
+        json.dump(employees, f, indent=4)
 
-# ---------- Employees ----------
-@app.route("/api/employees")
+# ------------------------------
+# API: Get all employees
+# ------------------------------
+@app.route("/api/employees", methods=["GET"])
 def get_employees():
-    return jsonify(load_json("employees.json"))
+    employees = load_employees()
+    return jsonify(employees)
 
-# ---------- Attendance ----------
-@app.route("/api/attendance", methods=["GET","POST"])
-def attendance():
-    employees = load_json("employees.json")
+# ------------------------------
+# API: Toggle Attendance (QR Check-in / Check-out)
+# ------------------------------
+@app.route("/api/attendance", methods=["POST"])
+def toggle_attendance():
+    data = request.get_json()
+    emp_id = str(data.get("id"))
+    if not emp_id:
+        return jsonify({"error": "Employee ID missing"}), 400
+
     today = datetime.date.today().strftime("%Y-%m-%d")
+    now = datetime.datetime.now().strftime("%H:%M:%S")
 
-    if request.method=="POST":
-        emp_id = int(request.json["id"])
-        for emp in employees:
-            if emp["id"] == emp_id:
-                # Add attendance if not already present
-                if not any(a["date"]==today for a in emp["attendance"]):
-                    now = datetime.datetime.now().strftime("%H:%M:%S")
-                    emp["attendance"].append({"date":today,"time":now})
-                    save_json("employees.json", employees)
-                    return jsonify({"status":"ok"})
-        return jsonify({"status":"already_present"})
+    employees = load_employees()
+    updated = False
 
-    # GET today's attendance summary
-    count = sum(1 for emp in employees if any(a["date"]==today for a in emp["attendance"]))
-    return jsonify({"present":count})
+    for emp in employees:
+        if str(emp["id"]) == emp_id:
+            emp["working"] = not emp.get("working", False)
 
-# ---------- Raw Materials ----------
-@app.route("/api/raw_materials")
-def raw_materials():
-    return jsonify(load_json("raw_materials.json"))
+            # Find today's attendance record
+            today_record = next((a for a in emp["attendance"] if a["date"] == today), None)
 
-# ---------- Productivity / Daily Products ----------
-@app.route("/api/daily_products", methods=["GET","POST"])
-def daily_products():
-    daily = load_json("daily_products.json")
-    today = datetime.date.today().strftime("%Y-%m-%d")
+            if emp["working"]:
+                # Check-in
+                if today_record is None:
+                    emp["attendance"].append({
+                        "date": today,
+                        "login_time": now,
+                        "logout_time": None
+                    })
+                else:
+                    today_record["login_time"] = now
+                    today_record["logout_time"] = None
+            else:
+                # Check-out
+                if today_record and not today_record.get("logout_time"):
+                    today_record["logout_time"] = now
 
-    if request.method=="POST":
-        dept = request.json["department"]
-        day_shift = request.json.get("day_shift",0)
-        night_shift = request.json.get("night_shift",0)
-        if today not in daily:
-            daily[today] = []
-        daily[today].append({"department":dept,"day_shift":day_shift,"night_shift":night_shift})
-        save_json("daily_products.json", daily)
-        return jsonify({"status":"ok"})
+            updated = True
+            break
 
-    return jsonify(daily.get(today,[]))
+    if not updated:
+        return jsonify({"status": "unknown_user"}), 404
 
-# ---------- Total Products ----------
-@app.route("/api/total_products", methods=["GET"])
-def total_products():
-    return jsonify(load_json("total_products.json"))
+    save_employees(employees)
+    return jsonify({"status": "ok", "id": emp_id, "working": emp["working"]})
 
-# ---------- Departments / Manpower ----------
-@app.route("/api/departments")
-def departments():
-    return jsonify(load_json("departments.json"))
+# ------------------------------
+# API: Add new employee + generate QR code
+# ------------------------------
+@app.route("/api/add_employee", methods=["POST"])
+def add_employee():
+    data = request.get_json()
+    if not data or "name" not in data or "department" not in data or "age" not in data:
+        return jsonify({"error": "Missing fields"}), 400
 
-# ---------- Daily Report ----------
-@app.route("/api/daily_report")
-def daily_report():
-    employees = load_json("employees.json")
-    daily = load_json("daily_products.json")
-    today = datetime.date.today().strftime("%Y-%m-%d")
+    employees = load_employees()
+    new_id = max([e["id"] for e in employees], default=0) + 1
 
-    attendance_count = sum(1 for emp in employees if any(a["date"]==today for a in emp["attendance"]))
-    products_today = daily.get(today,[])
-    report = {"date":today,"attendance":attendance_count,"daily_products":products_today}
-    return jsonify(report)
+    new_emp = {
+        "id": new_id,
+        "name": data["name"],
+        "age": int(data["age"]),
+        "department": data["department"],
+        "working": False,
+        "qr_code": f"qrcodes/emp_{new_id}.png",
+        "attendance": []
+    }
 
-if __name__=="__main__":
-    os.makedirs(DATA_DIR, exist_ok=True)
+    # Create QR code folder
+    os.makedirs("qrcodes", exist_ok=True)
+
+    # Generate QR code
+    qr_data = {
+        "id": new_id,
+        "name": new_emp["name"],
+        "department": new_emp["department"]
+    }
+    img = qrcode.make(json.dumps(qr_data))
+    img.save(new_emp["qr_code"])
+
+    employees.append(new_emp)
+    save_employees(employees)
+
+    return jsonify({"status": "created", "employee": new_emp})
+
+# ------------------------------
+# API: Serve QR code image
+# ------------------------------
+@app.route("/api/qr/<int:emp_id>", methods=["GET"])
+def get_qr(emp_id):
+    employees = load_employees()
+    emp = next((e for e in employees if e["id"] == emp_id), None)
+    if not emp:
+        return jsonify({"error": "Employee not found"}), 404
+
+    if not os.path.exists(emp["qr_code"]):
+        return jsonify({"error": "QR code not found"}), 404
+
+    return send_file(emp["qr_code"], mimetype="image/png")
+
+# ------------------------------
+# API: Dashboard Statistics
+# ------------------------------
+@app.route("/api/stats", methods=["GET"])
+def get_stats():
+    employees = load_employees()
+
+    # Age segmentation
+    ageSegmentation = {}
+    for e in employees:
+        age_group = f"{(e['age'] // 10) * 10}s"
+        if age_group not in ageSegmentation:
+            ageSegmentation[age_group] = {"count": 0, "productivity": 0}
+        if e.get("working"):
+            ageSegmentation[age_group]["count"] += 1
+            ageSegmentation[age_group]["productivity"] += 1  # demo value
+
+    ageSegmentation_list = [
+        {"age_group": k, "count": v["count"], "productivity": v["productivity"]}
+        for k, v in ageSegmentation.items()
+    ]
+
+    # Department-wise production
+    departments = {}
+    for e in employees:
+        dept = e["department"]
+        if dept not in departments:
+            departments[dept] = {"target": 100, "achieved": 0}
+        if e.get("working"):
+            departments[dept]["achieved"] += 10  # demo productivity
+
+    departments_list = [
+        {"department": k, "target": v["target"], "achieved": v["achieved"]}
+        for k, v in departments.items()
+    ]
+
+    # Efficiency
+    predicted_output = 1000  # demo value
+    actual_output = sum(d["achieved"] for d in departments_list)
+    efficiency = (actual_output / predicted_output) * 100
+
+    return jsonify({
+        "predicted_output": predicted_output,
+        "actual_output": actual_output,
+        "efficiency": efficiency,
+        "ageSegmentation": ageSegmentation_list,
+        "departments": departments_list
+    })
+
+# ------------------------------
+# App start
+# ------------------------------
+if __name__ == "__main__":
+    os.makedirs("data", exist_ok=True)
+    if not os.path.exists(DATA_FILE):
+        with open(DATA_FILE, "w") as f:
+            json.dump([], f, indent=4)
     app.run(debug=True, port=5000)
