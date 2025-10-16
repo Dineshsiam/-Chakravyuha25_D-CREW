@@ -1,0 +1,7 @@
+date,product,customer_order,produced,efficiency,cycle_time_min,manpower,dispatch_qty,vehicles,foam_available,spring_available
+2025-09-30,Spring Mattress,575,587,102.1,5.2,24,530,15,1,1
+2025-09-30,Cirrus Mattress,230,235,102.2,6.8,14,220,7,1,1
+2025-10-01,Spring Mattress,600,590,98.3,5.8,23,545,16,1,0
+2025-10-01,Cirrus Mattress,240,230,95.8,6.9,13,210,6,1,1
+2025-10-02,Spring Mattress,560,575,102.6,5.4,25,520,14,1,1
+2025-10-02,Cirrus Mattress,250,260,104.0,6.5,15,225,8,1,1

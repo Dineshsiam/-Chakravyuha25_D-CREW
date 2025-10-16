@@ -78,9 +78,7 @@ export default function WelcomeHero() {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.6 }}
         >
-          <button className="px-10 py-4 text-lg font-semibold rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-purple-600 hover:to-indigo-500 shadow-lg shadow-indigo-900/40 transition-all duration-300">
-            🚀 Get Started
-          </button>
+         
         </motion.div>
       </div>
 

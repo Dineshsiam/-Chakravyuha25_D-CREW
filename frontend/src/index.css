@@ -66,3 +66,111 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* 🌐 Base styles for all devices */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+  overflow-x: hidden;
+}
+
+/* 📱 Layout wrapper */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* 🧭 Navigation Bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #004aad;
+  color: white;
+  padding: 12px 24px;
+  flex-wrap: wrap;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 8px;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* 🧾 Cards or Dashboard Widgets */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  flex: 1 1 300px;
+}
+
+/* 🧱 Dashboard grid */
+.dashboard-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+}
+
+/* 📉 Responsive Charts or Tables */
+.chart,
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+/* 📱 Mobile Devices */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-grid {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  body {
+    font-size: 15px;
+  }
+}
+
+/* 📲 Small Phones */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 8px;
+  }
+
+  .navbar a {
+    font-size: 14px;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  h1, h2, h3 {
+    font-size: 1.2rem;
+  }
+}

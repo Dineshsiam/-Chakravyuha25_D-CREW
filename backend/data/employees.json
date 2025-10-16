@@ -10,8 +10,8 @@
             {
                 "date": "2025-10-15",
                 "time": "08:15:00",
-                "logout_time": "16:24:28",
-                "login_time": "16:24:06"
+                "login_time": "08:15:00",
+                "logout_time": "18:57:35"
             }
         ]
     },
@@ -22,7 +22,14 @@
         "department": "Foam",
         "working": true,
         "qr_code": "qrcodes/emp_2.png",
-        "attendance": []
+        "attendance": [
+            {
+                "date": "2025-10-15",
+                "time": "19:41:14",
+                "login_time": "23:21:24",
+                "logout_time": null
+            }
+        ]
     },
     {
         "id": 3,
@@ -34,7 +41,9 @@
         "attendance": [
             {
                 "date": "2025-10-15",
-                "time": "08:05:00"
+                "time": "08:05:00",
+                "login_time": "08:05:00",
+                "logout_time": null
             }
         ]
     },
@@ -57,7 +66,14 @@
         "attendance": [
             {
                 "date": "2025-10-15",
-                "time": "08:30:00"
+                "time": "08:30:00",
+                "login_time": "08:30:00",
+                "logout_time": "19:37:20"
+            },
+            {
+                "date": "2025-10-16",
+                "login_time": "07:09:40",
+                "logout_time": null
             }
         ]
     },
@@ -66,12 +82,19 @@
         "name": "Fiona",
         "age": 41,
         "department": "Spring",
-        "working": true,
+        "working": false,
         "qr_code": "qrcodes/emp_6.png",
         "attendance": [
             {
                 "date": "2025-10-15",
-                "time": "08:10:00"
+                "time": "08:10:00",
+                "login_time": "08:10:00",
+                "logout_time": null
+            },
+            {
+                "date": "2025-10-16",
+                "login_time": "06:30:26",
+                "logout_time": "07:13:49"
             }
         ]
     },
@@ -94,7 +117,14 @@
         "attendance": [
             {
                 "date": "2025-10-15",
-                "time": "08:25:00"
+                "time": "08:25:00",
+                "login_time": "08:25:00",
+                "logout_time": null
+            },
+            {
+                "date": "2025-10-16",
+                "login_time": "08:49:43",
+                "logout_time": null
             }
         ]
     },
@@ -112,12 +142,14 @@
         "name": "Jasmine",
         "age": 38,
         "department": "Packaging",
-        "working": true,
+        "working": false,
         "qr_code": "qrcodes/emp_10.png",
         "attendance": [
             {
                 "date": "2025-10-15",
-                "time": "08:05:00"
+                "time": "08:05:00",
+                "login_time": "08:05:00",
+                "logout_time": "19:42:10"
             }
         ]
     },
@@ -126,7 +158,7 @@
         "name": "Kevin",
         "age": 45,
         "department": "Maintenance",
-        "working": true,
+        "working": false,
         "qr_code": "qrcodes/emp_11.png",
         "attendance": []
     },
@@ -140,7 +172,9 @@
         "attendance": [
             {
                 "date": "2025-10-15",
-                "time": "08:12:00"
+                "time": "08:12:00",
+                "login_time": "08:12:00",
+                "logout_time": null
             }
         ]
     },
@@ -163,8 +197,19 @@
         "attendance": [
             {
                 "date": "2025-10-15",
-                "time": "08:20:00"
+                "time": "08:20:00",
+                "login_time": "08:20:00",
+                "logout_time": null
             }
         ]
+    },
+    {
+        "id": 15,
+        "name": "Dinesh",
+        "age": 23,
+        "department": "Tailoring",
+        "working": false,
+        "qr_code": "qrcodes/emp_15.png",
+        "attendance": []
     }
 ]

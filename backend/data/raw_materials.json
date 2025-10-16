@@ -1,5 +1,44 @@
 [
-  { "material": "Steel", "quantity": 1000, "department": "Bonnell Coiling" },
-  { "material": "Foam", "quantity": 500, "department": "Foam Cutting" },
-  { "material": "Thread", "quantity": 2000, "department": "Quilting" }
+    {
+        "id": 3,
+        "material": "Spring Coils",
+        "quantity": 420,
+        "unit": "sets",
+        "avg_daily_use": 95,
+        "lead_time_days": 4,
+        "last_restock": "2025-10-11",
+        "demand_trend": 1.2
+    },
+    {
+        "id": 5,
+        "material": "Packaging Box",
+        "quantity": 760,
+        "unit": "pcs",
+        "avg_daily_use": 150,
+        "lead_time_days": 5,
+        "last_restock": "2025-10-10",
+        "demand_trend": 1.3
+    },
+    {
+        "id": 6,
+        "material": "Fabric Cover",
+        "quantity": 470,
+        "unit": "meters",
+        "avg_daily_use": 90,
+        "lead_time_days": 2,
+        "last_restock": "2025-10-12",
+        "demand_trend": 0.8
+    },
+    {
+        "id": 8,
+        "material": "Foam",
+        "quantity": 220,
+        "category": "general",
+        "unit": "rolls",
+        "avg_daily_use": 75,
+        "lead_time_days": 4,
+        "demand_trend": 1.2,
+        "last_restock": "2025-10-16",
+        "last_updated": "2025-10-16T07:00:19.297603"
+    }
 ]

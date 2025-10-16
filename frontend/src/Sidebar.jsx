@@ -18,7 +18,16 @@ export default function Sidebar() {
       path: "/attendance-list",
       icon: <ListOrdered size={18} />,
     },
-    { name: "Dashboard", path: "/dashboard", icon: <BarChart3 size={18} /> },
+    {
+      name: "PredictionDashboard",
+      path: "/PredictionDashboard",
+      icon: <BarChart3 size={18} />,
+    },
+    {
+      name: "StockManagement",
+      path: "/StockManagement",
+      icon: <BarChart3 size={18} />,
+    },
   ];
 
   return (
